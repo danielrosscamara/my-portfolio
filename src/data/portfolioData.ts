@@ -6,7 +6,7 @@ export const personalInfo = {
   tagline: 'Building modern, responsive web experiences.',
   bio: `I'm a passionate Front-End Developer specializing in building clean, performant, and accessible web applications using React, TypeScript, and modern CSS frameworks.`,
   email: 'danielrosscamara@gmail.com',
-  resumeUrl: '#', // Replace with your Google Drive resume link later
+  resumeUrl: 'https://drive.google.com/file/d/1SFfd6FU3PSKIwFc47jqBxrB4UU0_XnOl/view?usp=sharing',
 };
 
 export const projects: Project[] = [
