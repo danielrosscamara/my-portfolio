@@ -1,0 +1,82 @@
+@import "tailwindcss";
+
+/* Dark mode: toggled via .dark class on <html> */
+@custom-variant dark (&:is(.dark *));
+
+/* Hide scrollbar globally */
+*, body {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Design tokens */
+@theme {
+  --color-primary: #4F46E5;
+  --color-primary-dark: #3730A3;
+  --font-sans: 'Inter', sans-serif;
+  --font-heading: 'Josefin Sans', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+/* Base HTML styles */
+html {
+  scroll-behavior: smooth;
+  font-family: var(--font-sans);
+}
+
+body {
+  @apply bg-white text-gray-900 dark:bg-gray-950 dark:text-gray-100;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Container */
+.container {
+  width: 100%;
+  margin: 0 auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  max-width: 1148px;
+}
+
+/* Heading font utility */
+.font-heading {
+  font-family: var(--font-heading);
+}
+
+/* Mono font utility */
+.font-mono-custom {
+  font-family: var(--font-mono);
+}
+
+/* Background blob animations (inspired by nevo.dev) */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(180px); }
+}
+
+@keyframes floatReverse {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-180px); }
+}
+
+@keyframes float2 {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(28px); }
+}
+
+.animate-float        { animation: float 12s ease-in-out infinite; }
+.animate-float-rev    { animation: floatReverse 14s ease-in-out infinite; }
+.animate-float2       { animation: float2 8s ease-in-out infinite; }
+
+/* Fade-in animation for section reveals */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease forwards;
+}
+
