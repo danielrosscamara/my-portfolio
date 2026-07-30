@@ -12,7 +12,7 @@ export const personalInfo = {
 export const projects: Project[] = [
   {
     id: 1,
-    title: 'Budget Planner v2',
+    title: 'Budget Planner',
     description: 'A personal finance app to track income, expenses, and savings goals built with React & TypeScript.',
     techStack: ['React', 'TypeScript', 'Tailwind CSS', 'Vite'],
     liveUrl: '#',
@@ -22,7 +22,7 @@ export const projects: Project[] = [
   {
     id: 2,
     title: 'Portfolio Website',
-    description: 'A modern, responsive personal portfolio website inspired by nevo.dev.',
+    description: 'A modern, responsive personal portfolio website.',
     techStack: ['React', 'TypeScript', 'Tailwind CSS', 'Vite'],
     liveUrl: '#',
     githubUrl: 'https://github.com/danielrosscamara/my-portfolio',

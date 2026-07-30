@@ -9,9 +9,27 @@ export interface Project {
   featured: boolean;
 }
 
+export type SkillCategory = 
+  | 'languages' 
+  | 'frontend' 
+  | 'backend' 
+  | 'databases' 
+  | 'ai_tools' 
+  | 'tools_platforms' 
+  | 'hardware_iot';
+
 export interface Skill {
   name: string;
-  category: 'frontend' | 'backend' | 'tools' | 'other';
+  category: SkillCategory;
+}
+
+export interface Experience {
+  id: number;
+  role: string;
+  company: string;
+  period: string;
+  description: string;
+  highlights: string[];
 }
 
 export interface SocialLink {
