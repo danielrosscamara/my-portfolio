@@ -64,6 +64,15 @@ export const projects: Project[] = [
     githubUrl: 'https://github.com/danielrosscamara/my-portfolio',
     featured: true,
   },
+  {
+    id: 5,
+    title: 'GHL API & Webhook Bridge',
+    description: 'Full-stack GoHighLevel integration suite featuring REST API v2 Middleware, Webhook Listener & Simulator, Custom Funnel Scripting Suite, and a React + Tailwind CSS Custom Dashboard App designed for GHL Custom Menu iFrame embedding.',
+    techStack: ['React', 'Node.js', 'Express', 'GoHighLevel API', 'Webhooks', 'Tailwind CSS'],
+    liveUrl: '#',
+    githubUrl: 'https://github.com/danielrosscamara/ghl-api-webhook-bridge',
+    featured: true,
+  },
 ];
 
 export const skills: Skill[] = [
