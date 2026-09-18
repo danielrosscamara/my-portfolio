@@ -1,10 +1,25 @@
+export interface ProjectSourceLink {
+  label: string;
+  url: string;
+}
+
+export interface CategorizedTechStack {
+  category: SkillCategory;
+  technologies: string[];
+}
+
 export interface Project {
   id: number;
   title: string;
+  subtitle?: string;
   description: string;
+  overview?: string;
+  keyFeatures?: string[];
   techStack: string[];
+  categorizedStack?: CategorizedTechStack[];
   liveUrl: string;
   githubUrl: string;
+  sourceLinks?: ProjectSourceLink[];
   imageUrl?: string;
   featured: boolean;
 }
