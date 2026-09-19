@@ -1,4 +1,4 @@
-import { ArrowLeft, ArrowUpRight, Code2 } from 'lucide-react';
+import { ArrowLeft, ArrowUpRight, ImageIcon } from 'lucide-react';
 import { projects, skills } from '../data/portfolioData';
 import type { SkillCategory } from '../types/portfolio';
 
@@ -70,34 +70,10 @@ export default function AllProjects({ onBackToHome, onSelectProject }: AllProjec
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                 ) : (
-                  /* Standardized browser mockup container for uniform layout */
-                  <div className="w-full h-full flex flex-col justify-between p-4 bg-linear-to-br from-gray-100/80 via-white to-gray-50 dark:from-gray-900/80 dark:via-gray-950 dark:to-gray-900">
-                    {/* Mockup Header Dots */}
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-1.5">
-                        <span className="w-2.5 h-2.5 rounded-full bg-red-400/80" />
-                        <span className="w-2.5 h-2.5 rounded-full bg-yellow-400/80" />
-                        <span className="w-2.5 h-2.5 rounded-full bg-green-400/80" />
-                      </div>
-                      <span className="font-mono-custom text-[10px] text-gray-400 uppercase tracking-widest">
-                        {project.subtitle ? project.subtitle.split(' ')[0] : 'Project'}
-                      </span>
-                    </div>
-
-                    {/* Central Watermark & Monogram */}
-                    <div className="flex flex-col items-center justify-center text-center gap-2 my-auto py-4">
-                      <div className="p-3 rounded-xl bg-primary/10 text-primary dark:bg-primary/15">
-                        <Code2 size={28} />
-                      </div>
-                      <span className="font-heading font-bold text-base text-gray-900 dark:text-white line-clamp-1 px-4">
-                        {project.title}
-                      </span>
-                    </div>
-
-                    {/* Bottom Indicator Bar */}
-                    <div className="flex items-center justify-between text-[11px] font-mono-custom text-gray-500 dark:text-gray-500 pt-2 border-t border-gray-200/50 dark:border-gray-800/60">
-                      <span>Status: Production</span>
-                      <span className="text-primary font-semibold">Ready</span>
+                  /* Minimalist uniform placeholder with gallery icon */
+                  <div className="w-full h-full flex items-center justify-center bg-gray-100/60 dark:bg-gray-900/50 transition-colors">
+                    <div className="p-4 rounded-2xl bg-gray-200/50 dark:bg-gray-800/50 text-gray-400 dark:text-gray-500 group-hover:text-primary dark:group-hover:text-primary group-hover:bg-primary/10 dark:group-hover:bg-primary/10 transition-all duration-200">
+                      <ImageIcon size={36} />
                     </div>
                   </div>
                 )}
