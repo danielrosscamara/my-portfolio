@@ -175,61 +175,22 @@ export default function ProjectDetails({ projectId, onBack }: ProjectDetailsProp
                 </p>
               </div>
 
-              {/* LIVE DEMO */}
-              <div className="mb-6">
-                <span className="block font-mono-custom text-xs text-gray-500 uppercase tracking-widest mb-1.5">
-                  Live Demo
-                </span>
-                {project.liveUrl && project.liveUrl !== '#' ? (
-                  <a
-                    href={project.liveUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-sm text-primary font-semibold hover:underline"
-                  >
-                    Visit Live Site
-                    <ExternalLink size={14} />
-                  </a>
-                ) : (
-                  <span className="text-sm text-gray-400 dark:text-gray-500">
-                    Internal Demo
-                  </span>
-                )}
-              </div>
-
               {/* SOURCE CODE */}
               <div>
-                <span className="block font-mono-custom text-xs text-gray-500 uppercase tracking-widest mb-2">
-                  Source Code
-                </span>
-                {project.sourceLinks && project.sourceLinks.length > 0 ? (
-                  <div className="flex flex-col gap-2">
-                    {project.sourceLinks.map((link) => (
-                      <a
-                        key={link.label}
-                        href={link.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary transition-colors py-1"
-                      >
-                        <FaGithub size={16} />
-                        <span>{link.label}</span>
-                      </a>
-                    ))}
-                  </div>
-                ) : project.githubUrl && project.githubUrl !== '#' ? (
+                {project.githubUrl && project.githubUrl !== '#' ? (
                   <a
                     href={project.githubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary transition-colors py-1"
+                    className="inline-flex items-center gap-2 text-sm font-semibold text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors cursor-pointer"
                   >
-                    <FaGithub size={16} />
-                    <span>GitHub Repository</span>
+                    <FaGithub size={18} />
+                    <span>Source Code</span>
                   </a>
                 ) : (
-                  <span className="text-sm text-gray-400 dark:text-gray-500">
-                    Private Enterprise Codebase
+                  <span className="inline-flex items-center gap-2 text-sm text-gray-400 dark:text-gray-500">
+                    <FaGithub size={18} />
+                    <span>Private Codebase</span>
                   </span>
                 )}
               </div>
