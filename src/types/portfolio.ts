@@ -23,6 +23,7 @@ export interface Project {
   imageUrl?: string;
   featured: boolean;
   pinned?: boolean;
+  status?: string;
 }
 
 export type SkillCategory = 
