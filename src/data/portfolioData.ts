@@ -42,10 +42,10 @@ export const projects: Project[] = [
       'Dynamic persona manager with macro interpolation ({{char}}, {{user}}) and sliding-window memory',
       'FastAPI backend with asynchronous SQLite / SQLModel architecture',
     ],
-    techStack: ['React', 'TypeScript', 'Tailwind CSS', 'FastAPI', 'Python', 'SQLite', 'OpenRouter API', 'SSE'],
+    techStack: ['React', 'TypeScript', 'Tailwind CSS', 'FastAPI', 'Python', 'SQLite', 'OpenRouter API', 'Server-Sent Events (SSE)'],
     categorizedStack: [
       { category: 'frontend', technologies: ['React', 'TypeScript', 'Tailwind CSS'] },
-      { category: 'backend', technologies: ['FastAPI', 'Python', 'REST APIs'] },
+      { category: 'backend', technologies: ['FastAPI', 'Python', 'REST APIs', 'Server-Sent Events (SSE)'] },
       { category: 'databases', technologies: ['SQLite'] },
       { category: 'ai_tools', technologies: ['OpenRouter API', 'Prompt Engineering'] },
       { category: 'languages', technologies: ['TypeScript', 'Python'] },
@@ -240,11 +240,12 @@ export const skills: Skill[] = [
   { name: 'React',        category: 'frontend' },
 
   // Backend & APIs
-  { name: 'NestJS',    category: 'backend' },
-  { name: 'Node.js',   category: 'backend' },
-  { name: 'FastAPI',   category: 'backend' },
-  { name: 'REST APIs', category: 'backend' },
-  { name: 'Socket.io', category: 'backend' },
+  { name: 'NestJS',                   category: 'backend' },
+  { name: 'Node.js',                  category: 'backend' },
+  { name: 'FastAPI',                  category: 'backend' },
+  { name: 'REST APIs',                category: 'backend' },
+  { name: 'Socket.io',                category: 'backend' },
+  { name: 'Server-Sent Events (SSE)', category: 'backend' },
 
   // Databases & ORM
   { name: 'PostgreSQL', category: 'databases' },
