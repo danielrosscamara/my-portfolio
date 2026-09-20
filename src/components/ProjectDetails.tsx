@@ -65,16 +65,16 @@ export default function ProjectDetails({ projectId, onBack }: ProjectDetailsProp
         </div>
 
         {/* Hero Banner */}
-        <div className="w-full aspect-video sm:aspect-21/9 max-h-115 rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-950 mb-12 shadow-sm">
+        <div className="w-full rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-950 mb-12 shadow-sm">
           {project.imageUrl ? (
             <img
               src={project.imageUrl}
               alt={project.title}
-              className="w-full h-full object-cover"
+              className="w-full h-auto object-contain block"
             />
           ) : (
             /* Hero placeholder with gallery icon */
-            <div className="w-full h-full flex items-center justify-center bg-gray-100/60 dark:bg-gray-900/50 transition-colors">
+            <div className="w-full aspect-video flex items-center justify-center bg-gray-100/60 dark:bg-gray-900/50 transition-colors">
               <div className="p-6 rounded-3xl bg-gray-200/50 dark:bg-gray-800/50 text-gray-400 dark:text-gray-500 transition-colors">
                 <ImageIcon size={48} />
               </div>
