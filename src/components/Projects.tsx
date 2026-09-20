@@ -8,7 +8,7 @@ interface ProjectsProps {
 }
 
 export default function Projects({ onViewAllProjects, onSelectProject }: ProjectsProps) {
-  const featuredProjects = projects.filter((p) => p.featured);
+  const pinnedProjects = projects.filter((p) => p.pinned);
 
   return (
     <section id="projects" className="py-24 bg-gray-50 dark:bg-gray-900/50">
@@ -34,7 +34,7 @@ export default function Projects({ onViewAllProjects, onSelectProject }: Project
 
         {/* Projects Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {featuredProjects.map((project) => (
+          {pinnedProjects.map((project) => (
             <div
               key={project.id}
               className="group relative flex flex-col p-6 rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950 hover:border-primary/50 hover:-translate-y-1 transition-all duration-300 hover:shadow-xl hover:shadow-primary/5"
