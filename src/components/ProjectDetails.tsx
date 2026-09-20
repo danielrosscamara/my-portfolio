@@ -175,6 +175,19 @@ export default function ProjectDetails({ projectId, onBack }: ProjectDetailsProp
                 </p>
               </div>
 
+              {/* STATUS */}
+              {project.status && (
+                <div className="mb-6">
+                  <span className="block font-mono-custom text-xs text-gray-500 uppercase tracking-widest mb-1.5">
+                    Status
+                  </span>
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20">
+                    <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" />
+                    {project.status}
+                  </span>
+                </div>
+              )}
+
               {/* SOURCE CODE */}
               <div>
                 {project.githubUrl && project.githubUrl !== '#' ? (
