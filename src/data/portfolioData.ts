@@ -245,7 +245,7 @@ export const skills: Skill[] = [
   { name: 'FastAPI',                  category: 'backend' },
   { name: 'REST APIs',                category: 'backend' },
   { name: 'Socket.io',                category: 'backend' },
-  { name: 'Server-Sent Events (SSE)', category: 'backend' },
+  { name: 'SSE', category: 'backend' },
 
   // Databases & ORM
   { name: 'PostgreSQL', category: 'databases' },
