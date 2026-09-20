@@ -22,6 +22,7 @@ export interface Project {
   sourceLinks?: ProjectSourceLink[];
   imageUrl?: string;
   featured: boolean;
+  pinned?: boolean;
 }
 
 export type SkillCategory = 
