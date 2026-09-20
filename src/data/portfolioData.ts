@@ -242,17 +242,20 @@ export const skills: Skill[] = [
   // Backend & APIs
   { name: 'NestJS',    category: 'backend' },
   { name: 'Node.js',   category: 'backend' },
+  { name: 'FastAPI',   category: 'backend' },
   { name: 'REST APIs', category: 'backend' },
   { name: 'Socket.io', category: 'backend' },
 
   // Databases & ORM
   { name: 'PostgreSQL', category: 'databases' },
+  { name: 'SQLite',     category: 'databases' },
   { name: 'Firebase',   category: 'databases' },
   { name: 'Prisma ORM', category: 'databases' },
 
   // AI-Augmented Development
   { name: 'Cursor',            category: 'ai_tools' },
   { name: 'Google AI Studio',  category: 'ai_tools' },
+  { name: 'OpenRouter API',    category: 'ai_tools' },
   { name: 'Prompt Engineering',category: 'ai_tools' },
 
   // Tools and Platforms
