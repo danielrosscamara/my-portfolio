@@ -42,10 +42,10 @@ export const projects: Project[] = [
       'Dynamic persona manager with macro interpolation ({{char}}, {{user}}) and sliding-window memory',
       'FastAPI backend with asynchronous SQLite / SQLModel architecture',
     ],
-    techStack: ['React', 'TypeScript', 'Tailwind CSS', 'FastAPI', 'Python', 'SQLite', 'OpenRouter API', 'Server-Sent Events (SSE)'],
+    techStack: ['React', 'TypeScript', 'Tailwind CSS', 'FastAPI', 'Python', 'SQLite', 'OpenRouter API', 'SSE'],
     categorizedStack: [
       { category: 'frontend', technologies: ['React', 'TypeScript', 'Tailwind CSS'] },
-      { category: 'backend', technologies: ['FastAPI', 'Python', 'REST APIs', 'Server-Sent Events (SSE)'] },
+      { category: 'backend', technologies: ['FastAPI', 'Python', 'REST APIs', 'SSE'] },
       { category: 'databases', technologies: ['SQLite'] },
       { category: 'ai_tools', technologies: ['OpenRouter API', 'Prompt Engineering'] },
       { category: 'languages', technologies: ['TypeScript', 'Python'] },
@@ -56,6 +56,7 @@ export const projects: Project[] = [
     sourceLinks: [
       { label: 'GitHub Repository', url: 'https://github.com/danielrosscamara/renoog-ai' },
     ],
+    imageUrl: '/projects/renoog ai.png',
     featured: true,
     pinned: true,
   },
@@ -139,6 +140,7 @@ export const projects: Project[] = [
     sourceLinks: [
       { label: 'GitHub Repository', url: 'https://github.com/danielrosscamara/outsmart' },
     ],
+    imageUrl: '/projects/outsmart.png',
     featured: true,
     pinned: true,
   },
@@ -165,6 +167,7 @@ export const projects: Project[] = [
     sourceLinks: [
       { label: 'GitHub Repository', url: 'https://github.com/danielrosscamara/AGI-WEBSITE' },
     ],
+    imageUrl: '/projects/agi website.png',
     featured: true,
     pinned: true,
   },
