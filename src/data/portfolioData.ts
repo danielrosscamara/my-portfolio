@@ -126,13 +126,13 @@ export const projects: Project[] = [
       'Automated idle appliance detection with push notifications and customizable operating schedules',
       'Non-invasive current sensing using split-core current transformer (CT coil) and step-down AC-DC power supply',
     ],
-    techStack: ['JavaScript', 'Firebase', 'IoT System Architecture', 'ESP8266', 'Arduino', 'Electronic Design', 'Tailwind CSS'],
+    techStack: ['HTML', 'CSS', 'JavaScript', 'Firebase', 'Bootstrap Studio', 'IoT System Architecture', 'Arduino'],
     categorizedStack: [
-      { category: 'hardware_iot', technologies: ['IoT System Architecture', 'Electronic Design', 'Arduino'] },
-      { category: 'frontend', technologies: ['Tailwind CSS'] },
-      { category: 'databases', technologies: ['Firebase'] },
+      { category: 'frontend', technologies: ['HTML', 'CSS'] },
       { category: 'languages', technologies: ['JavaScript'] },
-      { category: 'tools_platforms', technologies: ['Git', 'GitHub'] },
+      { category: 'databases', technologies: ['Firebase'] },
+      { category: 'tools_platforms', technologies: ['Bootstrap Studio', 'Git', 'GitHub'] },
+      { category: 'hardware_iot', technologies: ['IoT System Architecture', 'Electronic Design', 'Arduino'] },
     ],
     liveUrl: '#',
     githubUrl: 'https://github.com/danielrosscamara/outsmart',
@@ -256,11 +256,12 @@ export const skills: Skill[] = [
   { name: 'Prompt Engineering',category: 'ai_tools' },
 
   // Tools and Platforms
-  { name: 'Git',       category: 'tools_platforms' },
-  { name: 'GitHub',    category: 'tools_platforms' },
-  { name: 'Capacitor', category: 'tools_platforms' },
-  { name: 'Vercel',    category: 'tools_platforms' },
-  { name: 'Vite',      category: 'tools_platforms' },
+  { name: 'Git',              category: 'tools_platforms' },
+  { name: 'GitHub',           category: 'tools_platforms' },
+  { name: 'Capacitor',        category: 'tools_platforms' },
+  { name: 'Bootstrap Studio', category: 'tools_platforms' },
+  { name: 'Vercel',           category: 'tools_platforms' },
+  { name: 'Vite',             category: 'tools_platforms' },
 
   // Hardware & IoT
   { name: 'IoT System Architecture', category: 'hardware_iot' },
