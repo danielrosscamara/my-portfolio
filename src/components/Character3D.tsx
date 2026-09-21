@@ -26,28 +26,32 @@ export default function Character3D({ className = '' }: Character3DProps) {
     const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 100);
     camera.position.set(0, 0, 3.8);
 
-    // 3. Renderer Setup
+    // Check if device is touch/mobile
+    const isTouchDevice = window.matchMedia('(hover: none)').matches || window.innerWidth < 768;
+
+    // 3. High-Performance Renderer Setup
     const renderer = new THREE.WebGLRenderer({
-      antialias: true,
+      antialias: !isTouchDevice, // Disable expensive antialiasing on mobile
       alpha: true,
       powerPreference: 'high-performance',
+      stencil: false,
+      depth: true,
     });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    // Cap pixel ratio: max 1.2 on mobile to prevent GPU thermal throttling; max 1.5 on desktop
+    const maxPixelRatio = isTouchDevice ? 1.2 : 1.5;
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, maxPixelRatio));
     renderer.setSize(width, height);
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1.15;
-    renderer.shadowMap.enabled = true;
-    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     container.appendChild(renderer.domElement);
 
-    // 4. Studio Lighting System
-    const ambientLight = new THREE.AmbientLight(0xffffff, 1.2);
+    // 4. Studio Lighting System (No shadow map overhead)
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1.3);
     scene.add(ambientLight);
 
     // Key Light (tracks cursor to create dynamic eye and glasses glints)
     const keyLight = new THREE.DirectionalLight(0xfff8ed, 2.2);
     keyLight.position.set(2.5, 3.5, 3.5);
-    keyLight.castShadow = true;
     scene.add(keyLight);
 
     // Fill Light
@@ -88,19 +92,16 @@ export default function Character3D({ className = '' }: Character3DProps) {
         model.position.y = -center.y * desiredScale - 0.22; // Pivot anchored at neck
         model.position.z = -center.z * desiredScale;
 
-        // Enable shadows and enhance materials
+        // Enhance materials without expensive shadow overhead
         model.traverse((child) => {
           if ((child as THREE.Mesh).isMesh) {
             const mesh = child as THREE.Mesh;
-            mesh.castShadow = true;
-            mesh.receiveShadow = true;
-
             if (mesh.material) {
               const materials = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
               materials.forEach((mat) => {
                 if (mat instanceof THREE.MeshStandardMaterial) {
                   mat.envMapIntensity = 1.0;
-                  mat.needsUpdate = true;
+                  mat.roughness = Math.max(mat.roughness, 0.25);
                 }
               });
             }
@@ -129,7 +130,6 @@ export default function Character3D({ className = '' }: Character3DProps) {
     let targetRotationZ = 0;
     let targetKeyLightX = 2.5;
     let targetKeyLightY = 3.5;
-    const isTouchDevice = window.matchMedia('(hover: none)').matches;
 
     const handlePointerMove = (e: MouseEvent) => {
       if (isTouchDevice || !container) return;
@@ -157,10 +157,12 @@ export default function Character3D({ className = '' }: Character3DProps) {
 
     window.addEventListener('mousemove', handlePointerMove, { passive: true });
 
-    // 8. Animation & Render Loop (Grounded, zero floating)
+    // 8. Sleep Mode (IntersectionObserver): Pause rendering when scrolled out of view
+    let isVisible = true;
     let animationFrameId: number;
 
     const animate = () => {
+      if (!isVisible) return; // Completely sleep when off-screen
       animationFrameId = requestAnimationFrame(animate);
 
       if (!isTouchDevice) {
@@ -176,6 +178,21 @@ export default function Character3D({ className = '' }: Character3DProps) {
 
       renderer.render(scene, camera);
     };
+
+    const intersectionObserver = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          const wasVisible = isVisible;
+          isVisible = entry.isIntersecting;
+          if (isVisible && !wasVisible) {
+            // Wake up render loop on entering viewport
+            animate();
+          }
+        }
+      },
+      { threshold: 0.05 }
+    );
+    intersectionObserver.observe(container);
 
     animate();
 
@@ -195,6 +212,7 @@ export default function Character3D({ className = '' }: Character3DProps) {
     // 10. Memory Cleanup
     return () => {
       window.removeEventListener('mousemove', handlePointerMove);
+      intersectionObserver.disconnect();
       resizeObserver.disconnect();
       cancelAnimationFrame(animationFrameId);
 
