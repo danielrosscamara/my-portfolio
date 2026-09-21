@@ -226,7 +226,7 @@ export default function Character3D({ className = '' }: Character3DProps) {
         <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 z-20">
           <div className="w-12 h-12 rounded-full border-2 border-primary/30 border-t-primary animate-spin" />
           <p className="font-mono-custom text-xs text-gray-500 dark:text-gray-400 tracking-wider">
-            Loading 3D Experience... {loadingProgress > 0 && `${loadingProgress}%`}
+            Loading... {loadingProgress > 0 && `${loadingProgress}%`}
           </p>
         </div>
       )}
