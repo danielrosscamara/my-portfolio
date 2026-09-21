@@ -34,6 +34,7 @@ export default function Character3D({ className = '' }: Character3DProps) {
       antialias: !isTouchDevice, // Disable expensive antialiasing on mobile
       alpha: true,
       powerPreference: 'high-performance',
+      precision: isTouchDevice ? 'mediump' : 'highp',
       stencil: false,
       depth: true,
     });
@@ -43,7 +44,15 @@ export default function Character3D({ className = '' }: Character3DProps) {
     renderer.setSize(width, height);
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1.15;
-    container.appendChild(renderer.domElement);
+    const canvas = renderer.domElement;
+    container.appendChild(canvas);
+
+    // Suppress WebGL context loss crashes on older mobile devices
+    const handleContextLost = (e: Event) => {
+      e.preventDefault();
+      console.warn('WebGL context lost temporarily on mobile.');
+    };
+    canvas.addEventListener('webglcontextlost', handleContextLost, false);
 
     // 4. Studio Lighting System (No shadow map overhead)
     const ambientLight = new THREE.AmbientLight(0xffffff, 1.3);
@@ -109,7 +118,17 @@ export default function Character3D({ className = '' }: Character3DProps) {
         });
 
         modelGroup.add(model);
-        setIsLoading(false);
+
+        // Pre-compile shaders and upload textures into GPU memory behind the spinner
+        renderer.compile(scene, camera);
+
+        // Render one silent warm-up frame while spinner is still shown
+        renderer.render(scene, camera);
+
+        // Reveal canvas on next frame with zero flicker
+        requestAnimationFrame(() => {
+          setIsLoading(false);
+        });
       },
       (xhr) => {
         if (xhr.total > 0) {
