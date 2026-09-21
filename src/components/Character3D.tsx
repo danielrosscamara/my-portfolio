@@ -44,9 +44,9 @@ export default function Character3D({ className = '' }: Character3DProps) {
     const ambientLight = new THREE.AmbientLight(0xffffff, 1.2);
     scene.add(ambientLight);
 
-    // Key Light
-    const keyLight = new THREE.DirectionalLight(0xfff8ed, 2.0);
-    keyLight.position.set(3, 4, 3.5);
+    // Key Light (tracks cursor to create dynamic eye and glasses glints)
+    const keyLight = new THREE.DirectionalLight(0xfff8ed, 2.2);
+    keyLight.position.set(2.5, 3.5, 3.5);
     keyLight.castShadow = true;
     scene.add(keyLight);
 
@@ -55,7 +55,7 @@ export default function Character3D({ className = '' }: Character3DProps) {
     fillLight.position.set(-3, 2, 2);
     scene.add(fillLight);
 
-    // Rim Light
+    // Rim Light (crisp backlight highlighting hair and silhouette)
     const rimLight = new THREE.DirectionalLight(0x60a5fa, 1.8);
     rimLight.position.set(0, 3, -3);
     scene.add(rimLight);
@@ -79,12 +79,13 @@ export default function Character3D({ className = '' }: Character3DProps) {
         const center = box.getCenter(new THREE.Vector3());
 
         const maxDim = Math.max(size.x, size.y, size.z);
-        const desiredScale = 2.4 / (maxDim || 1);
+        const desiredScale = 2.55 / (maxDim || 1);
         model.scale.setScalar(desiredScale);
 
-        // Center on X and Z, adjust Y so eyes are at camera level
+        // Center on X and Z, set pivot point at neck level
+        model.rotation.y = -Math.PI / 2; // Orient forward facing the camera
         model.position.x = -center.x * desiredScale;
-        model.position.y = -center.y * desiredScale - 0.22;
+        model.position.y = -center.y * desiredScale - 0.22; // Pivot anchored at neck
         model.position.z = -center.z * desiredScale;
 
         // Enable shadows and enhance materials
@@ -122,44 +123,55 @@ export default function Character3D({ className = '' }: Character3DProps) {
       }
     );
 
-    // 7. Mouse Cursor Tracking & Physics
+    // 7. Mouse Cursor Tracking & Dynamic Light Glint Physics
     let targetRotationX = 0;
     let targetRotationY = 0;
+    let targetRotationZ = 0;
+    let targetKeyLightX = 2.5;
+    let targetKeyLightY = 3.5;
     const isTouchDevice = window.matchMedia('(hover: none)').matches;
 
     const handlePointerMove = (e: MouseEvent) => {
-      if (isTouchDevice) return;
-      // Normalized coordinates (-1 to 1) relative to window center
-      const x = (e.clientX / window.innerWidth) * 2 - 1;
-      const y = -(e.clientY / window.innerHeight) * 2 + 1;
+      if (isTouchDevice || !container) return;
+      const rect = container.getBoundingClientRect();
+      const characterCenterX = rect.left + rect.width / 2;
+      const characterCenterY = rect.top + rect.height * 0.4; // eye/head level
 
-      // Soft constraints for natural head rotation
-      targetRotationY = x * 0.45; // yaw: ~25 deg max
-      targetRotationX = -y * 0.25; // pitch: ~14 deg max
+      // Vector from character's center to the mouse position
+      const deltaX = e.clientX - characterCenterX;
+      const deltaY = e.clientY - characterCenterY;
+
+      // Normalize relative to half viewport for consistent reach
+      const normX = deltaX / (window.innerWidth * 0.5);
+      const normY = deltaY / (window.innerHeight * 0.5);
+
+      // Refined, high-end micro-rotations (prevents shoulder cut-off distortion)
+      targetRotationY = Math.max(-0.35, Math.min(0.35, normX * 0.32)); // Yaw: ~18 deg max
+      targetRotationX = Math.max(-0.22, Math.min(0.22, normY * 0.22)); // Pitch: ~12 deg max
+      targetRotationZ = Math.max(-0.06, Math.min(0.06, -normX * 0.05)); // Roll: subtle head cock
+
+      // Move key light toward cursor to create live specular highlights on eyes and glasses
+      targetKeyLightX = 2.5 + normX * 2.2;
+      targetKeyLightY = 3.5 - normY * 1.8;
     };
 
     window.addEventListener('mousemove', handlePointerMove, { passive: true });
 
-    // 8. Animation & Render Loop
+    // 8. Animation & Render Loop (Grounded, zero floating)
     let animationFrameId: number;
-    const clock = new THREE.Clock();
 
     const animate = () => {
       animationFrameId = requestAnimationFrame(animate);
-      const elapsedTime = clock.getElapsedTime();
 
-      if (isTouchDevice) {
-        // Mobile idle breathing/floating animation
-        modelGroup.position.y = Math.sin(elapsedTime * 1.8) * 0.05;
-        modelGroup.rotation.y = Math.sin(elapsedTime * 0.9) * 0.18;
-        modelGroup.rotation.x = Math.sin(elapsedTime * 1.2) * 0.04;
-      } else {
-        // Desktop smooth spring lerping to track cursor
+      if (!isTouchDevice) {
+        // Desktop smooth spring lerping to track cursor accurately
         modelGroup.rotation.y += (targetRotationY - modelGroup.rotation.y) * 0.08;
         modelGroup.rotation.x += (targetRotationX - modelGroup.rotation.x) * 0.08;
+        modelGroup.rotation.z += (targetRotationZ - modelGroup.rotation.z) * 0.08;
 
-        // Subtle organic breathing float overlay
-        modelGroup.position.y = Math.sin(elapsedTime * 2.0) * 0.03;
+        // Dynamic light lerp for glinting eye reflections
+        keyLight.position.x += (targetKeyLightX - keyLight.position.x) * 0.08;
+        keyLight.position.y += (targetKeyLightY - keyLight.position.y) * 0.08;
       }
 
       renderer.render(scene, camera);
@@ -205,7 +217,7 @@ export default function Character3D({ className = '' }: Character3DProps) {
   }, []);
 
   return (
-    <div className={`relative flex items-center justify-center w-full aspect-square max-w-105 ${className}`}>
+    <div className={`relative flex flex-col items-center justify-center w-full aspect-square max-w-105 ${className}`}>
       {/* Ambient Theme Backlight Glow */}
       <div className="absolute inset-0 m-auto w-3/4 h-3/4 rounded-full bg-primary/25 dark:bg-primary/20 blur-3xl pointer-events-none transition-opacity duration-700" />
 
@@ -228,10 +240,10 @@ export default function Character3D({ className = '' }: Character3DProps) {
         </div>
       )}
 
-      {/* Three.js Canvas Container */}
+      {/* Three.js Canvas Container with Soft Bottom Dissolve Mask */}
       <div
         ref={containerRef}
-        className={`w-full h-full cursor-grab active:cursor-grabbing transition-opacity duration-700 ${
+        className={`w-full h-full cursor-grab active:cursor-grabbing transition-opacity duration-700 mask-[linear-gradient(to_bottom,black_60%,transparent_96%)] [-webkit-mask-image:linear-gradient(to_bottom,black_60%,transparent_96%)] ${
           isLoading ? 'opacity-0' : 'opacity-100'
         }`}
         aria-label="Interactive 3D character tracking cursor"
@@ -239,3 +251,4 @@ export default function Character3D({ className = '' }: Character3DProps) {
     </div>
   );
 }
+
