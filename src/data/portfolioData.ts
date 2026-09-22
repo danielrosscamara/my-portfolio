@@ -2,9 +2,9 @@ import type { Project, Skill, Experience, SocialLink } from '../types/portfolio'
 
 export const personalInfo = {
   name: 'Daniel Ross Camara',
-  role: 'Front-End Developer',
+  role: 'AI-Native Full-Stack Developer',
   tagline: 'Building modern, responsive web experiences.',
-  bio: `I'm a passionate Front-End Developer specializing in building clean, performant, and accessible web applications using React, TypeScript, Angular, NestJS, and modern CSS frameworks.`,
+  bio: `I'm a full-stack developer who loves building responsive web apps and experimenting with modern AI workflows. With hands-on experience in React, Angular, NestJS, and Python, I enjoy turning ideas into clean, reliable software from the database up to the user interface.`,
   email: 'danielrosscamara@gmail.com',
   resumeUrl: 'https://drive.google.com/file/d/1UuLKqz5Xhk8XFtkmsv1nHZuOc8ZDCf0m/view?usp=sharing',
 };
