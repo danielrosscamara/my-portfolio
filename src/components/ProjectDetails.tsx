@@ -1,4 +1,4 @@
-import { ArrowLeft, ExternalLink, ImageIcon } from 'lucide-react';
+import { ArrowLeft, ExternalLink, ImageIcon, Clock, Lock } from 'lucide-react';
 import { FaGithub } from 'react-icons/fa';
 import { projects } from '../data/portfolioData';
 import type { SkillCategory } from '../types/portfolio';
@@ -49,18 +49,30 @@ export default function ProjectDetails({ projectId, onBack }: ProjectDetailsProp
             {project.title}
           </h1>
 
-          {/* Upper Right: View Live Site */}
+          {/* Upper Right: Live Site / Status Pill */}
           <div className="shrink-0">
-            <a
-              href={project.liveUrl && project.liveUrl !== '#' ? project.liveUrl : '#'}
-              target={project.liveUrl && project.liveUrl !== '#' ? '_blank' : undefined}
-              rel="noopener noreferrer"
-              aria-label={`Visit live demo for ${project.title}`}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-emerald-500/50 text-emerald-600 dark:text-emerald-400 bg-emerald-50/60 dark:bg-emerald-950/40 hover:bg-emerald-600 hover:text-white dark:hover:bg-emerald-500 dark:hover:text-gray-950 transition-all duration-200 font-mono-custom text-xs font-semibold shadow-sm shadow-emerald-500/10 cursor-pointer whitespace-nowrap shrink-0"
-            >
-              <ExternalLink size={14} />
-              View Live Site
-            </a>
+            {project.liveUrl && project.liveUrl !== '#' ? (
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Visit live demo for ${project.title}`}
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-emerald-500/50 text-emerald-600 dark:text-emerald-400 bg-emerald-50/60 dark:bg-emerald-950/40 hover:bg-emerald-600 hover:text-white dark:hover:bg-emerald-500 dark:hover:text-gray-950 transition-all duration-200 font-mono-custom text-xs font-semibold shadow-sm shadow-emerald-500/10 cursor-pointer whitespace-nowrap shrink-0"
+              >
+                <ExternalLink size={14} />
+                View Live Site
+              </a>
+            ) : project.status?.includes('WIP') ? (
+              <span className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg border border-amber-500/30 text-amber-600 dark:text-amber-400 bg-amber-50/60 dark:bg-amber-950/30 font-mono-custom text-xs font-semibold whitespace-nowrap shrink-0">
+                <Clock size={13} />
+                Coming Soon
+              </span>
+            ) : project.githubUrl === '#' ? (
+              <span className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg border border-gray-300 dark:border-gray-700 text-gray-600 dark:text-gray-400 bg-gray-100/60 dark:bg-gray-900/60 font-mono-custom text-xs font-semibold whitespace-nowrap shrink-0">
+                <Lock size={13} />
+                Internal App
+              </span>
+            ) : null}
           </div>
         </div>
 
