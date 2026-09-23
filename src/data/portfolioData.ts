@@ -106,7 +106,7 @@ export const projects: Project[] = [
       { category: 'languages', technologies: ['TypeScript', 'JavaScript'] },
       { category: 'tools_platforms', technologies: ['Vite', 'Git', 'GitHub', 'Vercel'] },
     ],
-    liveUrl: '#',
+    liveUrl: 'https://danielrosscamara.vercel.app/',
     githubUrl: 'https://github.com/danielrosscamara/my-portfolio',
     sourceLinks: [
       { label: 'GitHub Repository', url: 'https://github.com/danielrosscamara/my-portfolio' },
@@ -135,7 +135,7 @@ export const projects: Project[] = [
       { category: 'tools_platforms', technologies: ['Bootstrap Studio', 'Git', 'GitHub'] },
       { category: 'hardware_iot', technologies: ['IoT System Architecture', 'Electronic Design', 'Arduino'] },
     ],
-    liveUrl: '#',
+    liveUrl: 'https://outsmart-demo.vercel.app/',
     githubUrl: 'https://github.com/danielrosscamara/outsmart',
     sourceLinks: [
       { label: 'GitHub Repository', url: 'https://github.com/danielrosscamara/outsmart' },
@@ -163,7 +163,7 @@ export const projects: Project[] = [
       { category: 'languages', technologies: ['TypeScript', 'JavaScript'] },
       { category: 'tools_platforms', technologies: ['Git', 'GitHub', 'Vercel'] },
     ],
-    liveUrl: '#',
+    liveUrl: 'https://agi-web-demo.vercel.app/',
     githubUrl: '#',
     sourceLinks: [],
     imageUrl: '/projects/agi website.png',
