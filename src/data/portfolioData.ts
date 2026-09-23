@@ -42,12 +42,12 @@ export const projects: Project[] = [
       'Long-Term Story Memory: Characters remember past events, dialogue nuances, and relationships throughout extended writing sessions',
       'Distraction-Free Dark Mode: A sleek, comfortable interface designed for long, immersive creative sessions',
     ],
-    techStack: ['React', 'TypeScript', 'Tailwind CSS', 'FastAPI', 'Python', 'SQLite', 'OpenRouter API', 'SSE'],
+    techStack: ['React', 'TypeScript', 'Tailwind CSS', 'FastAPI', 'Python', 'SQLite', 'Ollama', 'OpenRouter API', 'SSE'],
     categorizedStack: [
       { category: 'frontend', technologies: ['React', 'TypeScript', 'Tailwind CSS'] },
       { category: 'backend', technologies: ['FastAPI', 'Python', 'REST APIs', 'SSE'] },
       { category: 'databases', technologies: ['SQLite'] },
-      { category: 'ai_tools', technologies: ['OpenRouter API', 'Prompt Engineering'] },
+      { category: 'ai_tools', technologies: ['Ollama', 'OpenRouter API', 'Prompt Engineering'] },
       { category: 'languages', technologies: ['TypeScript', 'Python'] },
       { category: 'tools_platforms', technologies: ['Git', 'GitHub', 'Vite'] },
     ],
@@ -262,6 +262,8 @@ export const skills: Skill[] = [
   { name: 'Prisma ORM', category: 'databases' },
 
   // AI-Augmented Development
+  { name: 'Antigravity',       category: 'ai_tools' },
+  { name: 'Ollama',            category: 'ai_tools' },
   { name: 'Cursor',            category: 'ai_tools' },
   { name: 'Google AI Studio',  category: 'ai_tools' },
   { name: 'OpenRouter API',    category: 'ai_tools' },
