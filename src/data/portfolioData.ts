@@ -6,7 +6,7 @@ export const personalInfo = {
   tagline: 'Building modern, responsive web experiences.',
   bio: `I'm a full-stack developer who loves building responsive web apps and experimenting with modern AI workflows. With hands-on experience in React, Angular, NestJS, and Python, I enjoy turning ideas into clean, reliable software from the database up to the user interface.`,
   email: 'danielrosscamara@gmail.com',
-  resumeUrl: 'https://drive.google.com/file/d/1UuLKqz5Xhk8XFtkmsv1nHZuOc8ZDCf0m/view?usp=sharing',
+  resumeUrl: 'https://drive.google.com/file/d/1aVSpRPzY-BxpO1mIRrwyBW4ALTELDF6K/view?usp=sharing',
 };
 
 export const experiences: Experience[] = [
